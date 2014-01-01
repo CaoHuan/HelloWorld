@@ -1,6 +1,0 @@
-E:\c++\VirtualTable\ConsoleApplication4\bin\Debug\ConsoleApplication4.exe.config
-E:\c++\VirtualTable\ConsoleApplication4\bin\Debug\ConsoleApplication4.exe
-E:\c++\VirtualTable\ConsoleApplication4\bin\Debug\ConsoleApplication4.pdb
-E:\c++\VirtualTable\ConsoleApplication4\obj\Debug\ConsoleApplication4.csprojResolveAssemblyReference.cache
-E:\c++\VirtualTable\ConsoleApplication4\obj\Debug\ConsoleApplication4.exe
-E:\c++\VirtualTable\ConsoleApplication4\obj\Debug\ConsoleApplication4.pdb
