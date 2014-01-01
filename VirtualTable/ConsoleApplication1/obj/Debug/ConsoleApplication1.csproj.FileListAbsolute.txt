@@ -1,0 +1,5 @@
+E:\c++\VirtualTable\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+E:\c++\VirtualTable\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+E:\c++\VirtualTable\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+E:\c++\VirtualTable\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+E:\c++\VirtualTable\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
