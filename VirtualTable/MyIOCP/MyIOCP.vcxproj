@@ -77,7 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Common\CommonHeader.h" />
+    <ClInclude Include="CommonHeader.h" />
     <ClInclude Include="MyIOCP.h" />
   </ItemGroup>
   <ItemGroup>

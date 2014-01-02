@@ -18,7 +18,7 @@
     <ClInclude Include="MyIOCP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Common\CommonHeader.h">
+    <ClInclude Include="CommonHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
