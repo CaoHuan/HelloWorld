@@ -1,1 +1,1 @@
-One day, I want to write some code to test my ablitily to hold a network programming. so, this is!
+One day, I want to write some code to test myself's ablitily to hold a network project. so, this is!

@@ -38,17 +38,13 @@ namespace ConsoleApplication4
     }
     class Program
     {
-       
+
         static void Main(string[] args)
         {
-            Action<int> action = null;
-            action = x =>
-            {
-                Console.Write("{0,-4}", x);
-                action += r => { return; };
-                action.GetInvocationList()[x / 200].DynamicInvoke(x + 1);
-            };
-            action(1); 
+            FileStream fs = File.Open(Console.ReadLine().Trim('\"'), FileMode.Open);
+            byte[] b = new byte[fs.Length];
+            fs.Read(b, 0, b.Length);
+            Console.WriteLine(Encoding.Default.GetString(b));
         }
         //             IEnumerable<IEnumerable<int>> rowOfNumbers;
         //             using (TextReader t = new StreamReader(path, Encoding.Default))

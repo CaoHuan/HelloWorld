@@ -36,7 +36,6 @@ namespace ConsoleApplication1
     {
         public Test()
         {
-
             Console.WriteLine(i++);
         }
 
