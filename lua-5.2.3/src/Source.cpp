@@ -56,7 +56,7 @@ void TestLua()
 	lua_getglobal(L, "a");
 	if (!lua_isnumber(L, -1))
 	{
-		cout << "-2 error" << lua_isnumber(L, -1) << lua_isnumber(L, -1) << endl;
+		cout << "-2 error" << endl;
 		return ;
 	}
 
