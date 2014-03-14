@@ -12,12 +12,72 @@ extern "C"
 };
 
 void TestLua();
-
+void TestLua2();
 int main()
 {
-	TestLua();
+	TestLua2();
 	return 0;
 }
+
+LUALIB_API int fun(lua_State *L)
+{
+	if (L == nullptr)
+	{
+		return 0;
+	}
+
+	cout << "This is a message from C++" << endl;
+	return 0;
+}
+
+
+void TestLua2()
+{
+	lua_State *L = luaL_newstate();
+	luaopen_base(L); //
+	luaopen_table(L); //
+	luaopen_package(L); //
+	luaopen_io(L); //
+	luaopen_string(L); //
+
+	luaL_openlibs(L); //打开以上所有的lib
+
+	lua_pushcfunction(L, fun);
+	lua_setglobal(L, "fun");
+	string str;
+	while (true)
+	{
+		cout << "输入lua代码:" << endl;
+		getline(cin, str, '\n');
+		if (luaL_loadfile(L, str.c_str())
+			|| lua_pcall(L, 0, 0, 0) )
+		{
+			const char * error = lua_tostring(L, -1) ;
+			cout << string(error) << endl;
+			//return;
+		}
+// 		else
+// 		{
+// 			break;
+// 		}
+
+	}
+
+}
+
+static const struct luaL_Reg mylib[] = 
+{
+	{
+		"dir", fun
+	},
+
+	{
+		NULL, NULL
+	}
+};
+
+
+
 
 void TestLua()
 {
