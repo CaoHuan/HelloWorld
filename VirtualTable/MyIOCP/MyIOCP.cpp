@@ -191,7 +191,7 @@ BOOL MyIOCP::PostReceive(WrapSocket* wrapSocket)
 
 
 void MyIOCP::Receive(WrapSocket* socket)
-{
+{	
     EnterCriticalSection(&mCriticalSetionOfReceivedData);
     MIDDLEDATABUFFERMAP::iterator iter(mReceivedDataMap.find(DataBufferKey(socket->GetPerHandleData().hasListenSocket, socket->GetPerHandleData().selfSocket)));
     if (iter != mReceivedDataMap.end())
