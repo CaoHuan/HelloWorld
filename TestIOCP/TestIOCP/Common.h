@@ -1,9 +1,15 @@
 #pragma once
-#include <iostream>
+
+
+#include <windows.h>
+
 
 // 专门为了自己的命名空间
 #define _CDH_BEGIN namespace CDH { 
 #define _CDH_END   }
+
+
+
 
 // 这个宏调用c运行库函数_beginthreadex
 typedef unsigned (__stdcall *PTHREAD_START) (void *);
@@ -23,3 +29,6 @@ typedef unsigned (__stdcall *PTHREAD_START) (void *);
 
 //旋转次数
 #define SpinCount 4000  
+
+
+typedef unsigned int UINT;

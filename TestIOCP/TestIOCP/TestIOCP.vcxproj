@@ -82,6 +82,7 @@
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="ProtoSocket.h" />
+    <ClInclude Include="WrapData.h" />
     <ClInclude Include="WrapSocket.h" />
   </ItemGroup>
   <ItemGroup>

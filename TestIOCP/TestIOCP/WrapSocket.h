@@ -1,6 +1,6 @@
 #pragma once
 
-#include <memory>
+
 #include <list>
 
 #include "ProtoSocket.h"
@@ -8,122 +8,79 @@
 #include "MessageInterface.h"
 _CDH_BEGIN
 
-// 存放接收数据
-class BuffData
+
+
+// 封装监听socket
+class ServerSocket : public ProtoSocket
 {
 public:
-	BuffData(UINT totalLen, UINT currentLen, char* data) 
-		: mData(new char[totalLen])
-		 ,mCurrentDataLen(currentLen)
-		 ,mTotalDataLen(totalLen)
+	ServerSocket(int port, IServerSocketMessageHandler *handle) 
+		: ProtoSocket()
+		 ,mPort(port)
 	{
-		ZeroMemory(mData, totalLen);
-
-		memcpy(mData, data, currentLen);
 	}
 
-	//append后面接收到的数据
-	void ReciveData(char *data, UINT len)
+	void StartListen()
 	{
-		if (data == nullptr || len <= 0)
-		{
-			return;
-		}
-		UINT copyLen = len + mCurrentDataLen > mTotalDataLen ? mTotalDataLen - mCurrentDataLen : len	;
 
-		memcpy(mData + mCurrentDataLen, data, copyLen);
 	}
 
-	// 是否将一个包的数据接收完整
-	bool IsAllRecived()
-	{
-		return mCurrentDataLen == mTotalDataLen;
-	}
+	void CloseSocket();
 
-	// 将包里的数据取出
-	bool GetData(char **pData, int& len)
-	{
-		if (!IsAllRecived())
-		{
-			return false;
-		}
-
-		*pData = mData;
-		mData = nullptr;
-
-		len	 = mTotalDataLen;
-
-		return true;
-	}
-	
-	int GetTotallLen()
-	{
-		return mTotalDataLen;
-	}
-	
-	int GetCurrentLen()
-	{
-		return mCurrentDataLen;
-	}
-
-	~BuffData()
-	{
-		if (mData)
-		{
-			delete[] mData;
-		}
-	}
 private:
 
-	char* mData;
-
-	// 当前数据的大小
-	UINT  mCurrentDataLen;
-
-	// 数据一共多大
-	UINT mTotalDataLen;
-
-};
-
-class ServerSocket
-{
-public:
-	ServerSocket(int port, IServerSocketMessageHandler *handle)
-	{
-	}
-private:
-
-	ProtoSocket mSocket;//mSelfSocket;
+	//ProtoSocket mSocket;//mSelfSocket;
 	IServerSocketMessageHandler *mMessageHandle;
 	//std::list<ProtoSocket*> mConnectedSocket;
 
-	SocketStateMachine<ProtoSocket> *mSM;
+	
+	// 服务器socket只是负责监听， 单工， 只有一个状态机
+	SocketStateMachine<ProtoSocket> mFSMS2C;
 
-	StateRecive mStateRecive;
-	StateAccept mStateAccept;
-	StateSend   mStateSend;
-	StateReady	mStateReady;
+	StateReady  mStateReady;
+
+	StateListen mStateListen;
+
 	StateDead	mStateDead;
+
+	int mPort; 
 };
 
-class ClientSocket
+// 封装连接socket
+class ClientSocket : public ProtoSocket
 {
 public:
 	ClientSocket(IMessageHandler *handler);
 	ClientSocket(int addr, int port, IMessageHandler *handler);
 
+	void OnRecive(char *data, UINT len);
+
+	void OnSend(char *data, UINT len);
+
 private:
 
-	ProtoSocket mSocket;//mSelfSocket;
+	//ProtoSocket mSocket;//mSelfSocket;
 	IMessageHandler *mMessageHandler;
 
-	SocketStateMachine<ProtoSocket> *mSM;
+	// socket是双工的， 所以在这里有两个状态机，
+	// 一个对应C --> S
+	// 一个对应S --> C
 
-	StateRecive mStateRecive;
-	StateAccept mStateAccept;
-	StateSend   mStateSend;
-	StateReady	mStateReady;
-	StateDead	mStateDead;
+	// C --> S 状态机
+	SocketStateMachine<ProtoSocket> mFSMC2S;
+
+	// S --> C 状态机
+	SocketStateMachine<ProtoSocket> mFSMS2C;
+
+	StateReady		mStateReady;
+
+	StateRecive		mStateRecive;
+	StateAccept		mStateAccept;
+
+	StateSend		mStateSend;
+	StateConnect	mStateConnect;
+
+	StateDead		mStateDead;
 };
 
 

@@ -36,6 +36,9 @@
     <ClInclude Include="Producer_Consumer_Queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WrapData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
